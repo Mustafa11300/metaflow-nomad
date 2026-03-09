@@ -59,7 +59,8 @@ class NomadClient(object):
         str
             The evaluation ID returned by Nomad.
         """
-        response = self.client.job.register_job({"Job": job_spec})
+        job_id = job_spec.get("ID", job_spec.get("Name", ""))
+        response = self.client.job.register_job(job_id, {"Job": job_spec})
         return response["EvalID"]
 
     def get_job_status(self, job_id: str) -> str:

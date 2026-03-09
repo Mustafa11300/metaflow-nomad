@@ -56,6 +56,8 @@ class Nomad(object):
         self.docker_image = nomad_access_params.pop("docker_image", "python:3.11-slim")
         self.cpu = nomad_access_params.pop("cpu", 500)
         self.memory = nomad_access_params.pop("memory", 256)
+        self.driver = nomad_access_params.pop("driver", "docker")
+        self.datacenters = nomad_access_params.pop("datacenters", None)
 
         # Create client with remaining params (address, token, region, namespace)
         client_params = {
@@ -129,6 +131,8 @@ class Nomad(object):
         run_time_limit=None,
         env=None,
         attrs=None,
+        driver=None,
+        datacenters=None,
     ) -> NomadJob:
         if env is None:
             env = {}
@@ -180,6 +184,8 @@ class Nomad(object):
             env=task_env,
             region=self.nomad_client.client.__dict__.get("region"),
             namespace=self.nomad_client.namespace or "default",
+            driver=driver or self.driver,
+            datacenters=datacenters or self.datacenters,
         )
 
         return self.job

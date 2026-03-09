@@ -28,6 +28,8 @@ class NomadJob(object):
         env: Optional[Dict[str, str]] = None,
         region: Optional[str] = None,
         namespace: str = "default",
+        driver: str = "docker",
+        datacenters: Optional[List[str]] = None,
     ):
         self.client = client
         self.name = _sanitize_name(name)
@@ -38,6 +40,8 @@ class NomadJob(object):
         self.env = env or {}
         self.region = region
         self.namespace = namespace
+        self.driver = driver
+        self.datacenters = datacenters or ["dc1"]
 
         self._job_id = None
         self._eval_id = None
@@ -54,10 +58,27 @@ class NomadJob(object):
     def alloc_id(self) -> Optional[str]:
         return self._alloc_id
 
+    def _build_task_config(self, cmd: str, args: List[str]) -> Dict[str, Any]:
+        """
+        Build the task Config block based on the selected driver.
+        """
+        if self.driver == "raw_exec":
+            return {
+                "command": cmd,
+                "args": args,
+            }
+        else:
+            # Default: docker driver
+            return {
+                "image": self.docker_image,
+                "command": cmd,
+                "args": args,
+            }
+
     def _build_job_spec(self) -> Dict[str, Any]:
         """
-        Build a Nomad job specification dict for a batch job
-        using the Docker task driver.
+        Build a Nomad job specification dict for a batch job.
+        Supports both 'docker' and 'raw_exec' task drivers.
         """
         # Build the command as a shell invocation
         # The first element is the entrypoint, rest are args
@@ -68,11 +89,13 @@ class NomadJob(object):
             cmd = "/bin/bash"
             args = ["-c", "echo 'No command specified'"]
 
+        task_config = self._build_task_config(cmd, args)
+
         job_spec = {
             "ID": self.name,
             "Name": self.name,
             "Type": "batch",
-            "Datacenters": ["dc1"],
+            "Datacenters": self.datacenters,
             "TaskGroups": [
                 {
                     "Name": "metaflow-group",
@@ -84,12 +107,8 @@ class NomadJob(object):
                     "Tasks": [
                         {
                             "Name": "metaflow-task",
-                            "Driver": "docker",
-                            "Config": {
-                                "image": self.docker_image,
-                                "command": cmd,
-                                "args": args,
-                            },
+                            "Driver": self.driver,
+                            "Config": task_config,
                             "Env": {
                                 **self.env,
                                 "METAFLOW_NOMAD_WORKLOAD": "1",

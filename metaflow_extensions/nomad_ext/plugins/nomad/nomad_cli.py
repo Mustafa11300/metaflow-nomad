@@ -34,6 +34,12 @@ def nomad():
 @click.option("--cpu", default=500, type=int, help="CPU in MHz")
 @click.option("--memory", default=256, type=int, help="Memory in MB")
 @click.option("--run-time-limit", default=None, type=int, help="Time limit in seconds")
+@click.option(
+    "--driver",
+    default="docker",
+    type=click.Choice(["docker", "raw_exec"]),
+    help="Nomad task driver (docker or raw_exec)",
+)
 @click.pass_context
 def step(
     ctx,
@@ -47,6 +53,7 @@ def step(
     cpu,
     memory,
     run_time_limit,
+    driver,
     **kwargs,
 ):
     def echo(msg, stream="stderr", **kwargs):
@@ -72,6 +79,7 @@ def step(
         "docker_image": docker_image,
         "cpu": cpu,
         "memory": memory,
+        "driver": driver,
     }
 
     # Get the metadata provider and datastore
@@ -140,6 +148,7 @@ def step(
             run_time_limit=run_time_limit,
             env=env,
             attrs=attrs,
+            driver=driver,
         )
 
         exit_code = nomad_runner.run_job(job, timeout=run_time_limit or 3600)

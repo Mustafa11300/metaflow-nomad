@@ -18,3 +18,10 @@ NOMAD_NAMESPACE = from_conf("NOMAD_NAMESPACE", default="default")
 
 # Default Docker image for Nomad tasks
 NOMAD_DOCKER_IMAGE = from_conf("NOMAD_DOCKER_IMAGE", default="python:3.11-slim")
+
+# Task driver to use: 'docker' or 'raw_exec'
+# raw_exec is useful for local development with `nomad agent -dev`
+NOMAD_DRIVER = from_conf("NOMAD_DRIVER", default="docker")
+
+# Comma-separated list of datacenters to target (default: dc1)
+NOMAD_DATACENTERS = from_conf("NOMAD_DATACENTERS", default="dc1")

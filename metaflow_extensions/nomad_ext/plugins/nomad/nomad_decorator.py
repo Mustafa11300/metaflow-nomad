@@ -49,6 +49,8 @@ class NomadDecorator(object):
         "docker_image": None,
         "cpu": 500,
         "memory": 256,
+        "driver": None,
+        "datacenters": None,
     }
 
     package_url = None
@@ -72,6 +74,8 @@ class NomadDecorator(object):
             NOMAD_REGION,
             NOMAD_NAMESPACE,
             NOMAD_DOCKER_IMAGE,
+            NOMAD_DRIVER,
+            NOMAD_DATACENTERS,
         )
 
         if not self.attributes["address"]:
@@ -84,6 +88,10 @@ class NomadDecorator(object):
             self.attributes["namespace"] = NOMAD_NAMESPACE
         if not self.attributes["docker_image"]:
             self.attributes["docker_image"] = NOMAD_DOCKER_IMAGE
+        if not self.attributes["driver"]:
+            self.attributes["driver"] = NOMAD_DRIVER
+        if not self.attributes["datacenters"]:
+            self.attributes["datacenters"] = NOMAD_DATACENTERS
 
     def step_init(self, flow, graph, step, decos, environment, flow_datastore, logger):
         from metaflow.exception import MetaflowException
