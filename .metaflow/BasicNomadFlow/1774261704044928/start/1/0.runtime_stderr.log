@@ -1,0 +1,24 @@
+[MFLOG|0|2026-03-23T10:28:24.525761Z|runtime|fcc63eb3-13ff-4729-a8ab-cfdcb5dc7595]    Internal error
+[MFLOG|0|2026-03-23T10:28:24.526687Z|runtime|bd9a7dde-1ecf-4de1-8805-3071c65a8d37]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:28:24.526769Z|runtime|e8e04cca-92ea-4a53-9277-0a302f6e7f3d]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli.py", line 727, in main
+[MFLOG|0|2026-03-23T10:28:24.526811Z|runtime|63cedaf9-bb18-4948-bac4-9f08e556ccac]    start(auto_envvar_prefix="METAFLOW", obj=state)
+[MFLOG|0|2026-03-23T10:28:24.526847Z|runtime|5dd07aa1-12bc-47f2-99c7-4d10f42aa54e]    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:28:24.526877Z|runtime|71a4a7b0-3f9e-425f-bcf7-4f9d9973778e]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 829, in __call__
+[MFLOG|0|2026-03-23T10:28:24.526911Z|runtime|1c61165b-c853-4651-b964-bda28e950798]    return self.main(args, kwargs)
+[MFLOG|0|2026-03-23T10:28:24.573468Z|runtime|1bcde412-f825-4942-b5c8-529d40af4608]           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:28:24.573632Z|runtime|c5e2d0b2-e53e-4fb5-800a-9ad56217dd72]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 782, in main
+[MFLOG|0|2026-03-23T10:28:24.573666Z|runtime|376ec6d1-e267-4bd6-ba74-83f1169881f9]    rv = self.invoke(ctx)
+[MFLOG|0|2026-03-23T10:28:24.573692Z|runtime|229cf59e-4859-4141-8454-6f1d86486433]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 66, in invoke
+[MFLOG|0|2026-03-23T10:28:24.573716Z|runtime|80688b8b-99a2-40ed-99cc-79d0c8e9a0ce]    cmd_name, cmd, args = self.resolve_command(ctx, args)
+[MFLOG|0|2026-03-23T10:28:24.573740Z|runtime|9c467683-9f7b-489a-9bd7-5a02de77eed3]                          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:28:24.573764Z|runtime|0076d4bc-69b2-4cd6-88cd-02e91ab58e00]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 1297, in resolve_command
+[MFLOG|0|2026-03-23T10:28:24.573794Z|runtime|fd1f489b-5fc8-41fc-9ae2-7bba377acb24]    cmd = self.get_command(ctx, cmd_name)
+[MFLOG|0|2026-03-23T10:28:24.573817Z|runtime|be10a6f2-154d-4c43-ac55-3622e5012f98]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 85, in get_command
+[MFLOG|0|2026-03-23T10:28:24.573839Z|runtime|f9edebe5-3614-4444-bdc4-3a39ac25e445]    subgroup = self._lazy_load(source_name, source)
+[MFLOG|0|2026-03-23T10:28:24.573861Z|runtime|197325f6-f48e-4ad4-a38c-40b8b09df8c7]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 96, in _lazy_load
+[MFLOG|0|2026-03-23T10:28:24.573883Z|runtime|3d7a8342-bc80-4b53-87d7-1bad68322e5f]    raise ValueError(
+[MFLOG|0|2026-03-23T10:28:24.573905Z|runtime|85dd7ca0-99db-442e-a308-2df79212a860]    ...<2 lines>...
+[MFLOG|0|2026-03-23T10:28:24.573926Z|runtime|034f3716-a6c0-4e7c-bc82-b0861a1dff20]    )
+[MFLOG|0|2026-03-23T10:28:24.573949Z|runtime|2521366a-bf8d-4bda-9752-a5bc9a27c0be]ValueError: Lazy loading of nomad failed by returning a non-group object
+[MFLOG|0|2026-03-23T10:28:24.573973Z|runtime|d6f135ea-9870-4152-aa36-1a7fb9c32cf3]
+[MFLOG|0|2026-03-23T10:28:24.574498Z|runtime|aa162a68-7d9e-4372-8a30-9b3a437a1ea8]Task failed.

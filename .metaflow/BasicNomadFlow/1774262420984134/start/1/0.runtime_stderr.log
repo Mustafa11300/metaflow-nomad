@@ -1,0 +1,26 @@
+[MFLOG|0|2026-03-23T10:40:21.399797Z|runtime|5252e2ac-50b2-4448-83e9-855be2970a15]    Launching Nomad job for step *start* (run-id: 1774262420984134)...
+[MFLOG|0|2026-03-23T10:40:21.440872Z|runtime|e21e7ead-1549-426d-b130-24cfeb6ba614]    Unexpected error: The BadRequestNomadException was raised with following response: json: cannot unmarshal string into Go struct field Job.Job.Datacenters of type []string.
+[MFLOG|0|2026-03-23T10:40:21.441836Z|runtime|357f4074-c2de-4d44-a8a8-361469102748]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:40:21.442450Z|runtime|6d56932b-e5d5-4528-bcce-cfe56169ff2f]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad_cli.py", line 166, in step
+[MFLOG|0|2026-03-23T10:40:21.442533Z|runtime|6280d44b-9112-4d39-b8bb-b3012104ef60]    exit_code = nomad_runner.run_job(job, timeout=run_time_limit or 3600)
+[MFLOG|0|2026-03-23T10:40:21.442581Z|runtime|e02539a6-64c1-43b3-abb3-881017e461c4]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad.py", line 217, in run_job
+[MFLOG|0|2026-03-23T10:40:21.442618Z|runtime|ef3d6493-22c2-4995-85d4-1a3c613c404a]    job.submit()
+[MFLOG|0|2026-03-23T10:40:21.442651Z|runtime|4d35f2c0-ab15-47e7-b5ab-6469c6be21da]    ~~~~~~~~~~^^
+[MFLOG|0|2026-03-23T10:40:21.442682Z|runtime|de803f29-e63f-4809-b096-94aed3915b9c]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad_job.py", line 144, in submit
+[MFLOG|0|2026-03-23T10:40:21.442711Z|runtime|55a2ce49-b3ff-4af8-ae86-7f12b5613209]    self._eval_id = self.client.submit(job_spec)
+[MFLOG|0|2026-03-23T10:40:21.442740Z|runtime|e442834e-0ad8-46bb-b55d-adc8205137d7]                    ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:40:21.442771Z|runtime|7ae8cf67-147c-4198-bac4-5fe221f56f3b]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad_client.py", line 63, in submit
+[MFLOG|0|2026-03-23T10:40:21.442804Z|runtime|0804905e-b7fc-4b7a-84d9-cfc963490c2e]    response = self.client.job.register_job(job_id, {"Job": job_spec})
+[MFLOG|0|2026-03-23T10:40:21.442898Z|runtime|3e7d781d-7e84-4b13-bd3f-ce9b0b270316]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/nomad/api/job.py", line 193, in register_job
+[MFLOG|0|2026-03-23T10:40:21.492002Z|runtime|ba442f08-3274-4900-9447-b49c34a31a25]    return self.request(id_, json=job, method="post").json()
+[MFLOG|0|2026-03-23T10:40:21.492149Z|runtime|0a444bad-b6da-41e8-aef0-f6cfb17ce0a7]           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:40:21.492183Z|runtime|7f2b34d0-217b-436e-987b-f8fdc3ffb9e1]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/nomad/api/base.py", line 108, in request
+[MFLOG|0|2026-03-23T10:40:21.492210Z|runtime|0333cb99-b1b6-4e8e-af2a-3937767c7d27]    response = self._request(
+[MFLOG|0|2026-03-23T10:40:21.492233Z|runtime|bf62f966-6397-40fa-86db-c2bdca51e5f8]        endpoint=endpoint,
+[MFLOG|0|2026-03-23T10:40:21.492262Z|runtime|801917a0-df70-451c-b033-08c745261039]    ...<7 lines>...
+[MFLOG|0|2026-03-23T10:40:21.492284Z|runtime|f1294448-60c2-4c58-ae9d-13a892c4a547]        stream=kwargs.get("stream", False),
+[MFLOG|0|2026-03-23T10:40:21.492306Z|runtime|703de9f4-a9f7-4b2f-a15c-765ae57d9689]    )
+[MFLOG|0|2026-03-23T10:40:21.492329Z|runtime|12caa9bc-e24f-49ca-875a-794119e8bb19]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/nomad/api/base.py", line 203, in _request
+[MFLOG|0|2026-03-23T10:40:21.492350Z|runtime|05967154-630b-47b7-931c-ef25a8d0214d]    raise nomad.api.exceptions.BadRequestNomadException(response)
+[MFLOG|0|2026-03-23T10:40:21.492372Z|runtime|932d8d24-58aa-4faf-a0f0-58f12fc5ac67]nomad.api.exceptions.BadRequestNomadException: The BadRequestNomadException was raised with following response: json: cannot unmarshal string into Go struct field Job.Job.Datacenters of type []string.
+[MFLOG|0|2026-03-23T10:40:21.492844Z|runtime|412ef755-1a38-48ee-a4f9-488968158392]Task failed.

@@ -1,0 +1,29 @@
+[MFLOG|0|2026-03-23T10:39:15.359928Z|runtime|13d7504b-07da-4209-8a60-e7681164d057]    Internal error
+[MFLOG|0|2026-03-23T10:39:15.361053Z|runtime|a2513a17-dde8-4d6a-95bc-674b7a94f39a]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:39:15.361130Z|runtime|01c37aca-5f03-4c7d-ab02-cef0449830ea]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli.py", line 727, in main
+[MFLOG|0|2026-03-23T10:39:15.361176Z|runtime|611f69a9-6466-4412-a866-38443ddb8df4]    start(auto_envvar_prefix="METAFLOW", obj=state)
+[MFLOG|0|2026-03-23T10:39:15.361209Z|runtime|dddf9d40-4bb7-408b-b9af-2fcf59dcb2f9]    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:15.361239Z|runtime|0bf5a423-5f64-4c0b-b37d-159e9f520168]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 829, in __call__
+[MFLOG|0|2026-03-23T10:39:15.361267Z|runtime|ddde9950-b520-4445-9398-a17a94f4b754]    return self.main(args, kwargs)
+[MFLOG|0|2026-03-23T10:39:15.361296Z|runtime|35069ff0-c28e-49b8-b441-68506f2073ad]           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:15.361324Z|runtime|79a8f430-9674-4784-947f-0059a81cb686]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 782, in main
+[MFLOG|0|2026-03-23T10:39:15.361350Z|runtime|b8d952db-29f8-4bc8-9be7-111e0d126a3b]    rv = self.invoke(ctx)
+[MFLOG|0|2026-03-23T10:39:15.361374Z|runtime|4af30311-96e1-45fe-a896-d67a8da3e414]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 69, in invoke
+[MFLOG|0|2026-03-23T10:39:15.361403Z|runtime|62f75de1-b7c7-4872-9eaa-844c012fc2ab]    return _process_result(sub_ctx.command.invoke(sub_ctx))
+[MFLOG|0|2026-03-23T10:39:15.361431Z|runtime|9c21ed54-8fda-4f3c-a9e4-732582c9bd18]                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:15.361457Z|runtime|d7ce0f5f-3a4a-429f-9f3c-ed33660acb21]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 1259, in invoke
+[MFLOG|0|2026-03-23T10:39:15.361481Z|runtime|ed530504-f8f4-4aac-91b1-1630a22cf9dc]    return _process_result(sub_ctx.command.invoke(sub_ctx))
+[MFLOG|0|2026-03-23T10:39:15.361508Z|runtime|de0578cb-9a81-4fad-8b2e-5e6e7f11cb38]                           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:15.361535Z|runtime|ab0db25a-e1ce-4f83-b5a8-521ae11f773a]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 1066, in invoke
+[MFLOG|0|2026-03-23T10:39:15.361561Z|runtime|32bdafe1-025a-4e8e-a43b-43a7c4427d70]    return ctx.invoke(self.callback, ctx.params)
+[MFLOG|0|2026-03-23T10:39:15.361585Z|runtime|cbfcde4d-1021-42f4-bc40-b7b12b1fb045]           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:15.361608Z|runtime|ff62ec0c-85ff-491f-bba7-d6ff49546684]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 610, in invoke
+[MFLOG|0|2026-03-23T10:39:15.361634Z|runtime|85f4b3a8-8a52-44f8-971e-a47503654746]    return callback(args, kwargs)
+[MFLOG|0|2026-03-23T10:39:15.398791Z|runtime|5502eaf1-eb21-461d-9ec6-7b1508e6a837]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/decorators.py", line 21, in new_func
+[MFLOG|0|2026-03-23T10:39:15.398948Z|runtime|0bd3c3e8-b761-4455-a9a6-3e0321aa6d49]    return f(get_current_context(), args, kwargs)
+[MFLOG|0|2026-03-23T10:39:15.398987Z|runtime|3cd506bb-e75e-46fd-8384-b8f565f76f22]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad_cli.py", line 82, in step
+[MFLOG|0|2026-03-23T10:39:15.399013Z|runtime|90efef09-963a-4cab-92eb-df0197f36403]    node = ctx.obj.graph[ctx.obj.step_name]
+[MFLOG|0|2026-03-23T10:39:15.399038Z|runtime|be7fb95b-57be-4c1c-9f56-82dc3356a902]                         ^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:15.399063Z|runtime|c8b32d54-2ca0-4cd3-bc39-0e952c317002]AttributeError: 'CliState' object has no attribute 'step_name'
+[MFLOG|0|2026-03-23T10:39:15.399094Z|runtime|90c6bfc3-0e52-4fcb-b40a-7c372a427cac]
+[MFLOG|0|2026-03-23T10:39:15.399589Z|runtime|eb11491e-6f0f-48bd-85ac-e957d65470bb]Task failed.

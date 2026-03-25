@@ -58,6 +58,8 @@ class Nomad(object):
         self.memory = nomad_access_params.pop("memory", 256)
         self.driver = nomad_access_params.pop("driver", "docker")
         self.datacenters = nomad_access_params.pop("datacenters", None)
+        if isinstance(self.datacenters, str):
+            self.datacenters = [dc.strip() for dc in self.datacenters.split(",") if dc.strip()]
 
         # Create client with remaining params (address, token, region, namespace)
         client_params = {
@@ -80,15 +82,21 @@ class Nomad(object):
         )
 
     def _command(self, environment, code_package_url, step_name, step_cmds, task_spec):
+        py_exec = shlex.quote(sys.executable)
         mflog_expr = export_mflog_env_vars(
             datastore_type=self.datastore.TYPE,
             stdout_path=STDOUT_PATH,
             stderr_path=STDERR_PATH,
             **task_spec
         )
-        init_cmds = environment.get_package_commands(
-            code_package_url, self.datastore.TYPE
-        )
+        # Local datastore has no remote package download path; when using
+        # raw_exec for local development, execute directly in the current env.
+        if self.datastore.TYPE == "local":
+            init_cmds = []
+        else:
+            init_cmds = environment.get_package_commands(
+                code_package_url, self.datastore.TYPE
+            )
         init_expr = " && ".join(init_cmds)
         step_expr = bash_capture_logs(
             " && ".join(
@@ -96,22 +104,26 @@ class Nomad(object):
                 + step_cmds
             )
         )
+        step_expr = step_expr.replace("python -m ", "%s -m " % py_exec)
 
         # Construct an entry point that:
         # 1) initializes the mflog environment (mflog_expr)
         # 2) bootstraps a metaflow environment (init_expr)
         # 3) executes a task (step_expr)
-        cmd_str = "true && mkdir -p %s && %s && %s && %s; " % (
-            LOGS_DIR,
+        cmd_parts = [
+            "true",
+            "mkdir -p %s" % LOGS_DIR,
             mflog_expr,
             init_expr,
             step_expr,
-        )
+        ]
+        cmd_str = " && ".join([part for part in cmd_parts if part]) + "; "
         # After the task has finished, save its exit code and persist final logs.
-        cmd_str += "c=$?; %s; exit $c" % BASH_SAVE_LOGS
+        save_logs_cmd = BASH_SAVE_LOGS.replace("python -m ", "%s -m " % py_exec)
+        cmd_str += "c=$?; %s; exit $c" % save_logs_cmd
         # Support sandbox init scripts
         cmd_str = (
-            '${METAFLOW_INIT_SCRIPT:+eval \\\\"${METAFLOW_INIT_SCRIPT}\\\\"} && %s'
+            'if [ -n "$${METAFLOW_INIT_SCRIPT}" ]; then eval "$${METAFLOW_INIT_SCRIPT}"; fi && %s'
             % cmd_str
         )
 
@@ -154,6 +166,10 @@ class Nomad(object):
 
         # Build environment variables for the Nomad task
         task_env = dict(env)
+        if "PATH" not in task_env:
+            task_env["PATH"] = os.environ.get("PATH", "")
+        if "PYTHONPATH" not in task_env and os.environ.get("PYTHONPATH"):
+            task_env["PYTHONPATH"] = os.environ.get("PYTHONPATH")
         # Propagate Metaflow configuration to the remote task
         for key, val in config_values():
             if val:

@@ -1,0 +1,6 @@
+[MFLOG|0|2026-03-23T10:48:14.651915Z|runtime|a42edfb7-16d0-445a-8c9a-39b05eb64ca1]    Launching Nomad job for step *start* (run-id: 1774262894239355)...
+[MFLOG|0|2026-03-23T10:48:16.694291Z|runtime|c107b3f4-d610-4958-8425-976f64d1424b]
+[MFLOG|0|2026-03-23T10:48:16.694781Z|runtime|7edf1dca-a3e0-457d-a3ed-9db882438f0d]--- Nomad task stderr ---
+[MFLOG|0|2026-03-23T10:48:16.694977Z|runtime|e84f0105-b75e-40aa-86e1-b3564873667c]{"Data":"L2Jpbi9iYXNoOiBweXRob246IGNvbW1hbmQgbm90IGZvdW5kCi9iaW4vYmFzaDogcHl0aG9uOiBjb21tYW5kIG5vdCBmb3VuZAovYmluL2Jhc2g6IHB5dGhvbjogY29tbWFuZCBub3QgZm91bmQK","File":"alloc/logs/metaflow-task.stderr.0","Offset":111}
+[MFLOG|0|2026-03-23T10:48:16.695171Z|runtime|86defc54-18ab-461d-b5fc-bf979bdbed4c]    Nomad task failed with exit code 1.
+[MFLOG|0|2026-03-23T10:48:16.755444Z|runtime|82cc280e-ae49-4902-b7e5-b017655a5778]Task failed.

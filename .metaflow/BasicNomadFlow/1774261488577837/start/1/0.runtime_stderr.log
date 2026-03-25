@@ -1,0 +1,44 @@
+[MFLOG|0|2026-03-23T10:24:49.047388Z|runtime|c7c74a82-c6b1-4abd-b9ed-0c1d8aba259b]    Internal error
+[MFLOG|0|2026-03-23T10:24:49.048856Z|runtime|15d7bb00-fdc1-4352-ba29-1b82170bac9b]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:24:49.095264Z|runtime|8b36ed42-9ccb-4e43-9412-7b06b373218f]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/extension_support/plugins.py", line 99, in get_plugin
+[MFLOG|0|2026-03-23T10:24:49.095422Z|runtime|800da73e-5f83-4119-88a5-0f49cce0fb96]    plugin_module = importlib.import_module(path)
+[MFLOG|0|2026-03-23T10:24:49.095462Z|runtime|95eeb01a-c642-4284-b211-cbfa9ffad048]  File "/opt/homebrew/Cellar/python@3.14/3.14.3_1/Frameworks/Python.framework/Versions/3.14/lib/python3.14/importlib/__init__.py", line 88, in import_module
+[MFLOG|0|2026-03-23T10:24:49.095493Z|runtime|5b171c26-e469-4e0b-b1bf-20916f71c6bf]    return _bootstrap._gcd_import(name[level:], package, level)
+[MFLOG|0|2026-03-23T10:24:49.095526Z|runtime|e4ba53be-0cad-4fa6-83df-cc650ebfffe1]           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:24:49.095549Z|runtime|be75d832-f2ac-42d1-92bb-cde63b311e02]  File "<frozen importlib._bootstrap>", line 1398, in _gcd_import
+[MFLOG|0|2026-03-23T10:24:49.095571Z|runtime|8f467df4-51af-4d11-9d5f-b6c3626e730a]  File "<frozen importlib._bootstrap>", line 1371, in _find_and_load
+[MFLOG|0|2026-03-23T10:24:49.095593Z|runtime|c8a09028-af63-4330-b536-d22c4852d828]  File "<frozen importlib._bootstrap>", line 1342, in _find_and_load_unlocked
+[MFLOG|0|2026-03-23T10:24:49.095621Z|runtime|1747af20-3005-4277-a94d-d3f2290cd369]  File "<frozen importlib._bootstrap>", line 938, in _load_unlocked
+[MFLOG|0|2026-03-23T10:24:49.095646Z|runtime|09b85820-5a7b-4840-8613-ae64d93811dc]  File "<frozen importlib._bootstrap_external>", line 759, in exec_module
+[MFLOG|0|2026-03-23T10:24:49.095672Z|runtime|6178cc7a-a937-435d-bbb3-a2c37c18d314]  File "<frozen importlib._bootstrap>", line 491, in _call_with_frames_removed
+[MFLOG|0|2026-03-23T10:24:49.095696Z|runtime|fa83dd05-428b-410e-b761-cd56d6ced926]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad_cli.py", line 5, in <module>
+[MFLOG|0|2026-03-23T10:24:49.095723Z|runtime|483f644f-3654-4ab2-bbec-2eca873f1e7b]    import click
+[MFLOG|0|2026-03-23T10:24:49.095745Z|runtime|78e628de-1be0-4e89-81b6-558225a4f658]ModuleNotFoundError: No module named 'click'
+[MFLOG|0|2026-03-23T10:24:49.095766Z|runtime|4936b620-a380-4ac8-8768-7cbdc211228f]
+[MFLOG|0|2026-03-23T10:24:49.095790Z|runtime|d8f94562-e851-4a23-b9ff-c11e436bcf2a]The above exception was the direct cause of the following exception:
+[MFLOG|0|2026-03-23T10:24:49.095811Z|runtime|d9c92c7a-dd99-4ac2-8a0c-d10e986b8554]
+[MFLOG|0|2026-03-23T10:24:49.095832Z|runtime|d7e82eeb-65d5-412c-9222-d097d46acae5]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:24:49.095853Z|runtime|e052b0cf-6dc4-4596-807c-18cd95705cb1]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli.py", line 727, in main
+[MFLOG|0|2026-03-23T10:24:49.095874Z|runtime|ea6d98b2-e70a-4f3e-bdd1-a632eaf15108]    start(auto_envvar_prefix="METAFLOW", obj=state)
+[MFLOG|0|2026-03-23T10:24:49.095898Z|runtime|8c3e9aec-d6f3-41bb-b8f0-41115e390c31]    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:24:49.095918Z|runtime|9c65a20a-e347-4521-add6-9084b0bb36f9]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 829, in __call__
+[MFLOG|0|2026-03-23T10:24:49.095942Z|runtime|1b379892-2ef7-46f4-b6af-36a8a339d8b0]    return self.main(args, kwargs)
+[MFLOG|0|2026-03-23T10:24:49.095966Z|runtime|fedac549-70b4-401b-8e73-414a93b6dbd5]           ~~~~~~~~~^^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:24:49.095987Z|runtime|0dc62413-1a35-4296-8401-be45d7cd2eae]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 782, in main
+[MFLOG|0|2026-03-23T10:24:49.096008Z|runtime|0f3ff0aa-24da-4163-bf71-7741152de951]    rv = self.invoke(ctx)
+[MFLOG|0|2026-03-23T10:24:49.096029Z|runtime|b163d46d-28b0-4d66-b568-3bad92e27aa8]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 66, in invoke
+[MFLOG|0|2026-03-23T10:24:49.096051Z|runtime|8ceb24ad-dd66-4b6a-b8ef-1f49f8feeed3]    cmd_name, cmd, args = self.resolve_command(ctx, args)
+[MFLOG|0|2026-03-23T10:24:49.096072Z|runtime|1c0b46a8-2ef9-4c6a-9bd8-9bbd57c74764]                          ~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:24:49.096092Z|runtime|44f05aef-3e4a-41cf-b057-82a3c27d1d65]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/_vendor/click/core.py", line 1297, in resolve_command
+[MFLOG|0|2026-03-23T10:24:49.096113Z|runtime|71cddd56-f4e0-4e8c-b4bb-e976258a4047]    cmd = self.get_command(ctx, cmd_name)
+[MFLOG|0|2026-03-23T10:24:49.096135Z|runtime|bbe79db0-4fe7-4b04-ad6e-80a95fc090c9]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 85, in get_command
+[MFLOG|0|2026-03-23T10:24:49.096156Z|runtime|97a79096-0f34-41d4-a60d-255af2e21cb7]    subgroup = self._lazy_load(source_name, source)
+[MFLOG|0|2026-03-23T10:24:49.096177Z|runtime|c46e1f6f-39c0-4554-9eab-1505d1e054b7]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/cli_components/utils.py", line 94, in _lazy_load
+[MFLOG|0|2026-03-23T10:24:49.096202Z|runtime|9cbb6fb0-92bf-4f96-bb20-d7027bbea046]    cmd_object = get_plugin("cli", source_path, source_name)
+[MFLOG|0|2026-03-23T10:24:49.096223Z|runtime|c32c3ed4-34e6-4f09-893b-2ac098753d3d]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/extension_support/plugins.py", line 101, in get_plugin
+[MFLOG|0|2026-03-23T10:24:49.096246Z|runtime|582f771a-e6e9-40a1-a51e-1d23852bc008]    raise ValueError(
+[MFLOG|0|2026-03-23T10:24:49.096267Z|runtime|baf9f5fa-40d6-43a1-81b1-332253b315a6]        "Cannot locate %s plugin '%s' at '%s'" % (category, name, path)
+[MFLOG|0|2026-03-23T10:24:49.096288Z|runtime|4a039ff5-1bcc-4807-9ada-f7370506571a]    ) from e
+[MFLOG|0|2026-03-23T10:24:49.096309Z|runtime|c87e9793-456f-4ebc-9d76-cf5bd335cf00]ValueError: Cannot locate cli plugin 'nomad' at 'metaflow_extensions.nomad_ext.plugins.nomad.nomad_cli'
+[MFLOG|0|2026-03-23T10:24:49.096330Z|runtime|a19b5997-51ee-4d55-b0c7-0e9fae21645b]
+[MFLOG|0|2026-03-23T10:24:49.096879Z|runtime|0a186ff6-3d8b-4b87-b375-40c5d66c020f]Task failed.

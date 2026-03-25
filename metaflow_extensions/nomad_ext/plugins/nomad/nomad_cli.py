@@ -2,7 +2,7 @@ import sys
 import json
 import traceback
 
-import click
+from metaflow._vendor import click
 
 from metaflow import util, current
 from metaflow import decorators as deco_module
@@ -24,16 +24,30 @@ def nomad():
 
 
 @nomad.command(help="Execute a single step on a Nomad cluster.")
+@click.argument("step-name")
+@click.argument("code-package-metadata")
 @click.argument("code-package-sha")
 @click.argument("code-package-url")
 @click.option("--address", default=None, help="Nomad API address")
 @click.option("--token", default=None, help="Nomad ACL token")
 @click.option("--region", default=None, help="Nomad region")
-@click.option("--namespace", default=None, help="Nomad namespace")
+@click.option("--nomad-namespace", default=None, help="Nomad namespace")
 @click.option("--docker-image", default=None, help="Docker image for the task")
 @click.option("--cpu", default=500, type=int, help="CPU in MHz")
 @click.option("--memory", default=256, type=int, help="Memory in MB")
+@click.option("--datacenters", default=None, help="Nomad datacenters")
 @click.option("--run-time-limit", default=None, type=int, help="Time limit in seconds")
+@click.option("--run-id", help="Passed to the top-level 'step'.")
+@click.option("--task-id", help="Passed to the top-level 'step'.")
+@click.option("--input-paths", help="Passed to the top-level 'step'.")
+@click.option("--split-index", help="Passed to the top-level 'step'.")
+@click.option("--clone-path", help="Passed to the top-level 'step'.")
+@click.option("--clone-run-id", help="Passed to the top-level 'step'.")
+@click.option("--tag", multiple=True, default=None, help="Passed to the top-level 'step'.")
+@click.option("--namespace", default=None, help="Passed to the top-level 'step'.")
+@click.option("--retry-count", default=0, help="Passed to the top-level 'step'.")
+@click.option("--max-user-code-retries", default=0, help="Passed to the top-level 'step'.")
+@click.option("--ubf-context", default=None)
 @click.option(
     "--driver",
     default="docker",
@@ -43,15 +57,18 @@ def nomad():
 @click.pass_context
 def step(
     ctx,
+    step_name,
+    code_package_metadata,
     code_package_sha,
     code_package_url,
     address,
     token,
     region,
-    namespace,
+    nomad_namespace,
     docker_image,
     cpu,
     memory,
+    datacenters,
     run_time_limit,
     driver,
     **kwargs,
@@ -62,10 +79,10 @@ def step(
         else:
             click.echo(msg, **kwargs)
 
-    node = ctx.obj.graph[ctx.obj.step_name]
+    node = ctx.obj.graph[step_name]
     echo(
         "    Launching Nomad job for step *%s* (run-id: %s)..."
-        % (ctx.obj.step_name, ctx.obj.run_id),
+        % (step_name, kwargs.get("run_id")),
         fg="magenta",
         bold=True,
     )
@@ -75,11 +92,12 @@ def step(
         "address": address,
         "token": token,
         "region": region,
-        "namespace": namespace,
+        "namespace": nomad_namespace,
         "docker_image": docker_image,
         "cpu": cpu,
         "memory": memory,
         "driver": driver,
+        "datacenters": datacenters,
     }
 
     # Get the metadata provider and datastore
@@ -96,39 +114,37 @@ def step(
     )
 
     # Build the step CLI command that will be run inside the Nomad container
-    top_args = " ".join(
-        util.dict_to_cli_options(ctx.obj.top_cli_options)
-    )
-    input_paths = kwargs.get("input_paths")
-    split_index = kwargs.get("split_index")
+    top_args = " ".join(util.dict_to_cli_options(ctx.parent.parent.params))
+    step_args = " ".join(util.dict_to_cli_options(kwargs))
 
-    step_args = " ".join(
-        util.dict_to_cli_options(ctx.obj.task_cli_options)
-    )
+    entrypoint = ctx.obj.entrypoint
+    if isinstance(entrypoint, (list, tuple)):
+        entrypoint = " ".join(entrypoint)
 
-    step_cli = "{entrypoint} {top_args} step {step_args}".format(
-        entrypoint=ctx.obj.entrypoint,
+    step_cli = "{entrypoint} {top_args} step {step} {step_args}".format(
+        entrypoint=entrypoint,
         top_args=top_args,
+        step=step_name,
         step_args=step_args,
     )
 
     # Task spec for mflog
     task_spec = {
         "flow_name": ctx.obj.flow.name,
-        "run_id": ctx.obj.run_id,
-        "step_name": ctx.obj.step_name,
-        "task_id": ctx.obj.task_id,
-        "retry_count": ctx.obj.retry_count,
+        "run_id": kwargs.get("run_id"),
+        "step_name": step_name,
+        "task_id": kwargs.get("task_id"),
+        "retry_count": kwargs.get("retry_count", 0),
     }
 
     # Attributes for job naming
     attrs = {
         "metaflow.user": util.get_username(),
         "metaflow.flow_name": ctx.obj.flow.name,
-        "metaflow.run_id": ctx.obj.run_id,
-        "metaflow.step_name": ctx.obj.step_name,
-        "metaflow.task_id": ctx.obj.task_id,
-        "metaflow.retry_count": ctx.obj.retry_count,
+        "metaflow.run_id": kwargs.get("run_id"),
+        "metaflow.step_name": step_name,
+        "metaflow.task_id": kwargs.get("task_id"),
+        "metaflow.retry_count": kwargs.get("retry_count", 0),
     }
 
     env = {}
@@ -136,7 +152,7 @@ def step(
     try:
         # Create and run the job
         job = nomad_runner.create_job(
-            step_name=ctx.obj.step_name,
+            step_name=step_name,
             step_cli=step_cli,
             task_spec=task_spec,
             code_package_sha=code_package_sha,

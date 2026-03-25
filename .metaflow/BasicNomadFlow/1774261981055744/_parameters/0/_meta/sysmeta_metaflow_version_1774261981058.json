@@ -1,0 +1,1 @@
+{"flow_id": "BasicNomadFlow", "run_number": "1774261981055744", "step_name": "_parameters", "task_id": "0", "field_name": "metaflow_version", "type": "metaflow_version", "value": "2.19.22+nomad(0.0.1)", "tags": ["attempt_id:0"], "user_name": "mustafahussain", "ts_epoch": 1774261981058}

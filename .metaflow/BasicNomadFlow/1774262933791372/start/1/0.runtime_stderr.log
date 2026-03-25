@@ -1,0 +1,6 @@
+[MFLOG|0|2026-03-23T10:48:54.211634Z|runtime|e0e3dfa0-5bf0-4a26-91f2-bae2912912f2]    Launching Nomad job for step *start* (run-id: 1774262933791372)...
+[MFLOG|0|2026-03-23T10:48:56.295636Z|runtime|4a1e9410-3267-4da9-b949-6ad8dbe6dce8]
+[MFLOG|0|2026-03-23T10:48:56.295910Z|runtime|48014f21-17a8-47ba-a636-20530f34f9e6]--- Nomad task stderr ---
+[MFLOG|0|2026-03-23T10:48:56.296279Z|runtime|51a07fad-2d82-4e1d-a64a-2b3f1388c4a5]{"Data":"VHJhY2ViYWNrIChtb3N0IHJlY2VudCBjYWxsIGxhc3QpOgogIEZpbGUgIi9Vc2Vycy9tdXN0YWZhaHVzc2Fpbi9tZXRhZmxvdy1ub21hZC9leGFtcGxlcy9iYXNpY19mbG93LnB5IiwgbGluZSAxNCwgaW4gPG1vZHVsZT4KICAgIGZyb20gbWV0YWZsb3cgaW1wb3J0IEZsb3dTcGVjLCBzdGVwLCBub21hZApJbXBvcnRFcnJvcjogY2Fubm90IGltcG9ydCBuYW1lICdub21hZCcgZnJvbSAnbWV0YWZsb3cnICgvVXNlcnMvbXVzdGFmYWh1c3NhaW4vbWV0YWZsb3ctbm9tYWQvLnZlbnYvbGliL3B5dGhvbjMuMTQvc2l0ZS1wYWNrYWdlcy9tZXRhZmxvdy9fX2luaXRfXy5weSkK","File":"alloc/logs/metaflow-task.stderr.0","Offset":324}
+[MFLOG|0|2026-03-23T10:48:56.296596Z|runtime|015d184b-d6c3-4cdf-a038-4dc037602ecd]    Nomad task failed with exit code 1.
+[MFLOG|0|2026-03-23T10:48:56.364061Z|runtime|0795a87c-b738-410e-9e3f-aa845bf36be9]Task failed.

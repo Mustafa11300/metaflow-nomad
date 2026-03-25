@@ -1,0 +1,5 @@
+[MFLOG|0|2026-03-23T10:23:49.009585Z|runtime|754cd8d5-8ca7-4285-8b1b-0b36380100df]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:23:49.039029Z|runtime|dbdb9c43-6c35-4c23-8d26-f051b8b5331d]  File "/Users/mustafahussain/metaflow-nomad/examples/basic_flow.py", line 14, in <module>
+[MFLOG|0|2026-03-23T10:23:49.039211Z|runtime|d2ff6233-c2d1-4fd9-b7fb-9eb0d5106d7b]    from metaflow import FlowSpec, step, nomad
+[MFLOG|0|2026-03-23T10:23:49.039249Z|runtime|32a433e2-7220-49fb-b922-2de86c346ddc]ImportError: cannot import name 'nomad' from 'metaflow' (/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/__init__.py)
+[MFLOG|0|2026-03-23T10:23:49.039767Z|runtime|b3a44795-3c90-4a1d-a804-2f5842a2c09d]Task failed.

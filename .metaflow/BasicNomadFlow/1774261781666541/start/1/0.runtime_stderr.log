@@ -1,0 +1,5 @@
+[MFLOG|0|2026-03-23T10:29:42.122686Z|runtime|e1c7bc00-b219-4ba7-8704-847f4c3fa4f5]Usage: basic_flow.py nomad step [OPTIONS] CODE_PACKAGE_SHA CODE_PACKAGE_URL
+[MFLOG|0|2026-03-23T10:29:42.158355Z|runtime|372653ae-b5b3-4bb8-82f8-440ba0288454]Try 'basic_flow.py nomad step --help' for help.
+[MFLOG|0|2026-03-23T10:29:42.158515Z|runtime|9cdecbee-9955-4a6c-b801-1ab3f1da2ccf]
+[MFLOG|0|2026-03-23T10:29:42.158553Z|runtime|6bb5db32-d556-47e6-8ff3-4ef05c10397c]Error: no such option: --run-id
+[MFLOG|0|2026-03-23T10:29:42.159090Z|runtime|7641884c-3c21-4867-a3b0-d8358f4c7022]Task failed.

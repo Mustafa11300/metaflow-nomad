@@ -55,18 +55,16 @@ class NomadDecorator(object):
 
     package_url = None
     package_sha = None
+    package_metadata = None
     run_time_limit = None
 
     def __init__(self, attributes=None, statically_defined=False):
         # Defer import: safe here because __init__ is only called after
-        # metaflow is fully loaded
-        from metaflow.decorators import StepDecorator
+        # metaflow is fully loaded. We only need Decorator state setup here;
+        # mutating __bases__ at runtime is not supported on newer Python.
+        from metaflow.decorators import Decorator
 
-        # Fixup the class hierarchy at first instantiation
-        if NomadDecorator.__bases__ == (object,):
-            NomadDecorator.__bases__ = (StepDecorator,)
-
-        super(NomadDecorator, self).__init__(attributes, statically_defined)
+        Decorator.__init__(self, attributes, statically_defined)
 
         from metaflow.metaflow_config import (
             NOMAD_ADDRESS,
@@ -93,6 +91,12 @@ class NomadDecorator(object):
         if not self.attributes["datacenters"]:
             self.attributes["datacenters"] = NOMAD_DATACENTERS
 
+    def external_init(self):
+        # Metaflow expects this lifecycle method from Decorator.
+        from metaflow.decorators import Decorator
+
+        return Decorator.external_init(self)
+
     def step_init(self, flow, graph, step, decos, environment, flow_datastore, logger):
         from metaflow.exception import MetaflowException
 
@@ -107,6 +111,12 @@ class NomadDecorator(object):
                 "with the @nomad decorator. @parallel is not supported "
                 "with @nomad.".format(step=step)
             )
+
+    def add_to_package(self):
+        return []
+
+    def step_task_retry_count(self):
+        return 0, 0
 
     def package_init(self, flow, step_name, environment):
         from .nomad_exceptions import NomadException
@@ -140,11 +150,38 @@ class NomadDecorator(object):
     ):
         if retry_count <= max_user_code_retries:
             cli_args.commands = ["nomad", "step"]
+            cli_args.command_args.append(self.package_metadata)
             cli_args.command_args.append(self.package_sha)
             cli_args.command_args.append(self.package_url)
-            cli_args.command_options.update(self.attributes)
+
+            # --namespace is reserved by Metaflow step CLI, so pass Nomad
+            # namespace under a dedicated option.
+            for k, v in self.attributes.items():
+                if k == "namespace":
+                    cli_args.command_options["nomad-namespace"] = v
+                else:
+                    cli_args.command_options[k] = v
+
             cli_args.command_options["run-time-limit"] = self.run_time_limit
             cli_args.entrypoint[0] = sys.executable
+
+    def runtime_finished(self, exception):
+        pass
+
+    def task_decorate(
+        self, step_func, flow, graph, retry_count, max_user_code_retries, ubf_context
+    ):
+        return step_func
+
+    def task_post_step(
+        self, step_name, flow, graph, retry_count, max_user_code_retries
+    ):
+        pass
+
+    def task_exception(
+        self, exception, step_name, flow, graph, retry_count, max_user_code_retries
+    ):
+        return False
 
     def task_pre_step(
         self,
@@ -195,7 +232,11 @@ class NomadDecorator(object):
             from metaflow.metadata_provider.util import sync_local_metadata_to_datastore
             from metaflow.metaflow_config import DATASTORE_LOCAL_DIR
 
-            if hasattr(self, "metadata") and self.metadata.TYPE == "local":
+            if (
+                hasattr(self, "metadata")
+                and self.metadata.TYPE == "local"
+                and os.path.exists(DATASTORE_LOCAL_DIR)
+            ):
                 sync_local_metadata_to_datastore(
                     DATASTORE_LOCAL_DIR, self.task_datastore
                 )
@@ -206,3 +247,4 @@ class NomadDecorator(object):
             cls.package_url, cls.package_sha = flow_datastore.save_data(
                 [package.blob], len_hint=1
             )[0]
+            cls.package_metadata = package.package_metadata

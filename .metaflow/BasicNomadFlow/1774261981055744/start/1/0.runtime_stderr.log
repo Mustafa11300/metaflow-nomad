@@ -1,0 +1,5 @@
+[MFLOG|0|2026-03-23T10:33:01.472188Z|runtime|05ecd040-c330-40e8-922f-27a731100460]Usage: basic_flow.py nomad step [OPTIONS] CODE_PACKAGE_SHA CODE_PACKAGE_URL
+[MFLOG|0|2026-03-23T10:33:01.567996Z|runtime|ab0143a8-419c-420f-af98-09771b13323a]Try 'basic_flow.py nomad step --help' for help.
+[MFLOG|0|2026-03-23T10:33:01.568146Z|runtime|81a7283e-84b4-4d5f-9248-4d8c5a9ee9fa]
+[MFLOG|0|2026-03-23T10:33:01.568182Z|runtime|3a331ea2-e10a-46ed-aef2-2177ece8925c]Error: no such option: --datacenters
+[MFLOG|0|2026-03-23T10:33:01.568693Z|runtime|2f731196-5de7-4f55-8db5-523742cffaa8]Task failed.

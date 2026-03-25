@@ -1,0 +1,26 @@
+[MFLOG|0|2026-03-23T10:39:42.453226Z|runtime|9fca946a-6cc8-4c0e-9111-8a0dab3a0e5f]    Launching Nomad job for step *start* (run-id: 1774262382041463)...
+[MFLOG|0|2026-03-23T10:39:42.456494Z|runtime|dc450f81-01f8-4525-a7e5-fc3fd64f48b3]    Unexpected error: Unknown datastore type: local
+[MFLOG|0|2026-03-23T10:39:42.456854Z|runtime|bf9593fe-0806-4ac0-93ab-2eb0bd2ac18e]Traceback (most recent call last):
+[MFLOG|0|2026-03-23T10:39:42.457239Z|runtime|8a19b716-d3f2-4151-a595-72c21b8ecc5b]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad_cli.py", line 150, in step
+[MFLOG|0|2026-03-23T10:39:42.457282Z|runtime|fb235bc4-d54d-4b98-9227-4d3edf5306e6]    job = nomad_runner.create_job(
+[MFLOG|0|2026-03-23T10:39:42.457317Z|runtime|0b807a4a-e08c-4784-b179-9a1f1358ffe9]        step_name=step_name,
+[MFLOG|0|2026-03-23T10:39:42.457347Z|runtime|8cbc2e88-d4b1-4bbf-94db-1c49b8a05846]    ...<11 lines>...
+[MFLOG|0|2026-03-23T10:39:42.457374Z|runtime|be0d94a0-9659-4a6b-ac9d-c6f449c40e78]        driver=driver,
+[MFLOG|0|2026-03-23T10:39:42.457402Z|runtime|1a7ea043-7fc7-46a6-9c4d-525f1efbd904]    )
+[MFLOG|0|2026-03-23T10:39:42.457428Z|runtime|af3efcc5-dcb4-484a-bdfb-d122ae2e6a7c]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad.py", line 151, in create_job
+[MFLOG|0|2026-03-23T10:39:42.457453Z|runtime|56eb9b14-01e4-4559-a1b3-b088870902ad]    command = self._command(
+[MFLOG|0|2026-03-23T10:39:42.457482Z|runtime|1ec32742-806a-4fdb-a165-05ca4b96ddd0]        self.environment, code_package_url, step_name, [step_cli], task_spec
+[MFLOG|0|2026-03-23T10:39:42.457508Z|runtime|c4b2a65a-031f-4a1d-ab6e-173cb4ffc96e]    )
+[MFLOG|0|2026-03-23T10:39:42.457535Z|runtime|b6fcc983-3093-4255-9d94-4566d39cc594]  File "/Users/mustafahussain/metaflow-nomad/metaflow_extensions/nomad_ext/plugins/nomad/nomad.py", line 89, in _command
+[MFLOG|0|2026-03-23T10:39:42.493505Z|runtime|627c655b-9cfc-4747-bdd5-e3507e698b11]    init_cmds = environment.get_package_commands(
+[MFLOG|0|2026-03-23T10:39:42.493644Z|runtime|46347c09-d6d3-4672-9058-0ae1b0cfa99c]        code_package_url, self.datastore.TYPE
+[MFLOG|0|2026-03-23T10:39:42.493678Z|runtime|62aa3613-fbaa-4914-bed4-a870d896955b]    )
+[MFLOG|0|2026-03-23T10:39:42.493702Z|runtime|aafdf2d0-d233-4484-b737-69db05f5491a]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/metaflow_environment.py", line 225, in get_package_commands
+[MFLOG|0|2026-03-23T10:39:42.493724Z|runtime|b3fb3010-7ed4-4cb2-a6e7-1471ee2bcc0f]    self._get_install_dependencies_cmd(datastore_type),
+[MFLOG|0|2026-03-23T10:39:42.493749Z|runtime|318ad4f2-a55d-4716-99a2-887c4d709ed6]    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+[MFLOG|0|2026-03-23T10:39:42.493771Z|runtime|47c5daf6-8e06-46e4-94e5-39883a709d16]  File "/Users/mustafahussain/metaflow-nomad/.venv/lib/python3.14/site-packages/metaflow/metaflow_environment.py", line 182, in _get_install_dependencies_cmd
+[MFLOG|0|2026-03-23T10:39:42.493796Z|runtime|795b16eb-5768-45b2-b278-f10dbfb6fe5f]    raise NotImplementedError(
+[MFLOG|0|2026-03-23T10:39:42.493817Z|runtime|673dc956-66ec-4f23-a1e3-fcfaf11c9380]        "Unknown datastore type: {}".format(datastore_type)
+[MFLOG|0|2026-03-23T10:39:42.493841Z|runtime|6edb8e63-d984-48a6-93ec-ead1f7a34057]    )
+[MFLOG|0|2026-03-23T10:39:42.493863Z|runtime|6900d1e2-29ad-4a9f-a3fd-2198ab5da4d3]NotImplementedError: Unknown datastore type: local
+[MFLOG|0|2026-03-23T10:39:42.494344Z|runtime|841bdf47-d17e-4c8c-b99f-07fba6701819]Task failed.

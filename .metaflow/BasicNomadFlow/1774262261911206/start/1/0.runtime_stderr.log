@@ -1,0 +1,5 @@
+[MFLOG|0|2026-03-23T10:37:42.330026Z|runtime|257d7872-bc5d-46fa-a523-aed5500fb605]Usage: basic_flow.py nomad step [OPTIONS] CODE_PACKAGE_SHA CODE_PACKAGE_URL
+[MFLOG|0|2026-03-23T10:37:42.367777Z|runtime|264ceddd-394e-4e48-bd7d-206ab2261a5f]Try 'basic_flow.py nomad step --help' for help.
+[MFLOG|0|2026-03-23T10:37:42.367938Z|runtime|233beb6f-5148-499b-90a6-e75cf9aab778]
+[MFLOG|0|2026-03-23T10:37:42.367978Z|runtime|7c4df85e-16a5-4597-bc18-18f1d354cb5d]Error: Got unexpected extra argument (/Users/mustafahussain/metaflow-nomad/.metaflow/BasicNomadFlow/data/b6/b66ca8f10eec673c2d3c6c70c80a23dc442b8374)
+[MFLOG|0|2026-03-23T10:37:42.368541Z|runtime|4a3fd548-78d8-4c86-8475-dafa9673379c]Task failed.

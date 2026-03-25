@@ -1,0 +1,3 @@
+[MFLOG|0|2026-03-23T10:40:40.486434Z|runtime|5e81f5b6-04d3-4bee-92ff-26c601338cc2]    Launching Nomad job for step *start* (run-id: 1774262440039779)...
+[MFLOG|0|2026-03-23T10:40:50.599234Z|runtime|4d781fd5-dd0a-4c7a-a71a-2573e0420dea]    Nomad task failed with exit code 1.
+[MFLOG|0|2026-03-23T10:40:50.661541Z|runtime|28cebce0-b65e-4425-afa6-07b865a16c06]Task failed.
